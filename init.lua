@@ -91,7 +91,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
 -- See `:help vim.opt`
@@ -626,7 +626,26 @@ require('lazy').setup({
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         -- ts_ls = {},
         --
-
+        gopls = { 'go' },
+        golangci_lint_ls = { 'go' },
+        pyright = {
+          filetypes = { 'python' },
+          settings = {
+            pyright = {
+              autoImportCompletion = true,
+            },
+            python = {
+              analysis = {
+                autoSearchPaths = true,
+                diagnosticMode = 'openFilesOnly',
+                useLibraryCodeForTypes = true,
+                typeCheckingMode = 'off',
+              },
+            },
+          },
+        },
+        terraformls = { 'tf', 'tfvars', 'tfvars.tpl' },
+        tflint = { 'tf', 'tfvars', 'tfvars.tpl' },
         lua_ls = {
           -- cmd = { ... },
           -- filetypes = { ... },
@@ -641,6 +660,11 @@ require('lazy').setup({
             },
           },
         },
+        templ = { 'templ' },
+        tailwindcss = { 'templ' },
+        html = { 'html', 'templ' },
+        htmx = { 'html', 'templ' },
+        jsonnet_ls = { 'jsonnet', 'libsonnet' },
       }
 
       -- Ensure the servers and tools above are installed
@@ -833,21 +857,28 @@ require('lazy').setup({
     end,
   },
 
-  { -- You can easily change to a different colorscheme.
-    -- Change the name of the colorscheme plugin below, and then
-    -- change the command in the config to whatever the name of that colorscheme is.
-    --
-    -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-    'folke/tokyonight.nvim',
-    priority = 1000, -- Make sure to load this before all the other start plugins.
-    init = function()
-      -- Load the colorscheme here.
-      -- Like many other themes, this one has different styles, and you could load
-      -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'tokyonight-night'
-
-      -- You can configure highlights by doing something like:
-      vim.cmd.hi 'Comment gui=none'
+  -- { -- You can easily change to a different colorscheme.
+  --   -- Change the name of the colorscheme plugin below, and then
+  --   -- change the command in the config to whatever the name of that colorscheme is
+  --   --
+  --   -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`
+  --   'folke/tokyonight.nvim',
+  --   lazy = false, -- make sure we load this during startup if it is your main colorscheme
+  --   priority = 1000, -- make sure to load this before all the other start plugins
+  --   config = function()
+  --     -- Load the colorscheme here
+  --     vim.cmd.colorscheme 'tokyonight-night'
+  --
+  --     -- You can configure highlights by doing something like
+  --     vim.cmd.hi 'Comment gui=none'
+  --   end,
+  -- },
+  {
+    'catppuccin/nvim',
+    name = 'catpuccin',
+    priority = 1000,
+    config = function()
+      vim.cmd.colorscheme 'catppuccin'
     end,
   },
 
@@ -872,20 +903,17 @@ require('lazy').setup({
       -- - sr)'  - [S]urround [R]eplace [)] [']
       require('mini.surround').setup()
 
-      -- Simple and easy statusline.
-      --  You could remove this setup call if you don't like it,
-      --  and try some other statusline plugin
-      local statusline = require 'mini.statusline'
+      -- local statusline = require 'mini.statusline'
       -- set use_icons to true if you have a Nerd Font
-      statusline.setup { use_icons = vim.g.have_nerd_font }
+      -- statusline.setup { use_icons = vim.g.have_nerd_font }
 
       -- You can configure sections in the statusline by overriding their
       -- default behavior. For example, here we set the section for
       -- cursor location to LINE:COLUMN
       ---@diagnostic disable-next-line: duplicate-set-field
-      statusline.section_location = function()
-        return '%2l:%-2v'
-      end
+      -- statusline.section_location = function()
+      --   return '%2l:%-2v'
+      -- end
 
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
@@ -897,7 +925,7 @@ require('lazy').setup({
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
+      ensure_installed = { 'bash', 'go', 'hcl', 'html', 'lua', 'markdown', 'terraform', 'vim', 'vimdoc', 'yaml', 'templ', 'jsonnet', 'gleam' },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
@@ -937,12 +965,14 @@ require('lazy').setup({
   --    This is the easiest way to modularize your config.
   --
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
-  -- { import = 'custom.plugins' },
-  --
   -- For additional information with loading, sourcing and examples see `:help lazy.nvim-🔌-plugin-spec`
   -- Or use telescope!
   -- In normal mode type `<space>sh` then write `lazy.nvim-plugin`
   -- you can continue same window with `<space>sr` which resumes last telescope search
+  { import = 'custom.plugins' },
+  { import = 'custom.commands' },
+  { import = 'custom.filetypes' },
+  { import = 'custom.opts' },
 }, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
