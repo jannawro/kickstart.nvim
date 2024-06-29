@@ -722,6 +722,11 @@ require('lazy').setup({
         html = { 'html', 'templ' },
         htmx = { 'html', 'templ' },
         jsonnet_ls = { 'jsonnet', 'libsonnet' },
+        bashls = {},
+        dockerls = {},
+        docker_compose_language_service = {},
+        marksman = {}, -- markdown lsp
+        gitlabs_ci_ls = {},
       }
 
       -- Ensure the servers and tools above are installed
@@ -971,7 +976,23 @@ require('lazy').setup({
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
-      ensure_installed = { 'bash', 'go', 'hcl', 'html', 'lua', 'markdown', 'terraform', 'vim', 'vimdoc', 'yaml', 'templ', 'jsonnet', 'gleam' },
+      ensure_installed = {
+        'bash',
+        'dockerfile',
+        'gleam',
+        'go',
+        'hcl',
+        'html',
+        'jsonnet',
+        'lua',
+        'markdown',
+        'templ',
+        'terraform',
+        'tmux',
+        'vim',
+        'vimdoc',
+        'yaml',
+      },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
