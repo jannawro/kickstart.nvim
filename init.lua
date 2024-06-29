@@ -726,7 +726,7 @@ require('lazy').setup({
         dockerls = {},
         docker_compose_language_service = {},
         marksman = {}, -- markdown lsp
-        gitlabs_ci_ls = {},
+        gitlab_ci_ls = {},
       }
 
       -- Ensure the servers and tools above are installed
@@ -759,6 +759,7 @@ require('lazy').setup({
             -- certain features of an LSP (for example, turning off formatting for ts_ls)
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
             require('lspconfig')[server_name].setup(server)
+            require('lspconfig').gleam.setup {}
           end,
         },
       }
