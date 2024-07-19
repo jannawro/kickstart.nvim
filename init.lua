@@ -102,7 +102,7 @@ vim.g.have_nerd_font = true
 vim.opt.number = true
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
--- vim.opt.relativenumber = true
+vim.opt.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
@@ -383,13 +383,48 @@ require('lazy').setup({
         --
         defaults = {
           initial_mode = 'normal',
+          file_previewer = require('telescope.previewers').vim_buffer_cat.new,
         },
         -- defaults = {
         --   mappings = {
         --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
         --   },
         -- },
-        -- pickers = {}
+        pickers = {
+          help_tags = {
+            theme = 'ivy',
+          },
+          keymaps = {
+            theme = 'ivy',
+          },
+          find_files = {
+            theme = 'ivy',
+          },
+          builtin = {
+            theme = 'ivy',
+          },
+          grep_string = {
+            theme = 'ivy',
+          },
+          live_grep = {
+            theme = 'ivy',
+          },
+          diagnostics = {
+            theme = 'ivy',
+          },
+          resume = {
+            theme = 'ivy',
+          },
+          oldfiles = {
+            theme = 'ivy',
+          },
+          buffers = {
+            theme = 'ivy',
+          },
+          current_buffer_fuzzy_find = {
+            theme = 'ivy',
+          },
+        },
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
