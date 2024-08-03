@@ -778,6 +778,18 @@ require('lazy').setup({
         docker_compose_language_service = {},
         marksman = {}, -- markdown lsp
         gitlab_ci_ls = {},
+        yamlls = {
+          yaml = {
+            schemas = {
+              kubernetes = 'k8s-*.yaml',
+              ['http://json.schemastore.org/github-workflow'] = '.github/workflows/*',
+              ['http://json.schemastore.org/github-action'] = '.github/action.{yml,yaml}',
+              ['http://json.schemastore.org/kustomization'] = 'kustomization.{yml,yaml}',
+              ['http://json.schemastore.org/chart'] = 'Chart.{yml,yaml}',
+              ['https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json'] = '*gitlab-ci.yaml',
+            },
+          },
+        },
       }
 
       -- Ensure the servers and tools above are installed
