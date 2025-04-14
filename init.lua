@@ -173,21 +173,6 @@ vim.o.confirm = true
 --  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
--- Diagnostic opts
-vim.diagnostic.config {
-  underline = true,
-  signs = true,
-  virtual_text = false,
-  float = {
-    show_header = true,
-    source = 'if_many',
-    border = 'rounded',
-    focusable = false,
-  },
-  update_in_insert = false, -- default to false
-  severity_sort = false, -- default to false
-}
-
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>dq', vim.diagnostic.setloclist, { desc = 'Open [D]iagnostic [Q]uickfix list' })
 vim.keymap.set('n', '<leader>dw', vim.diagnostic.open_float, { desc = 'Open [D]iagnostic [W]indow under cursor' })
