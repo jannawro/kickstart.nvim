@@ -413,7 +413,7 @@ require('lazy').setup({
         --  All the info you're looking for is in `:help telescope.setup()`
         --
         defaults = {
-          initial_mode = 'normal',
+          initial_mode = 'insert',
           file_previewer = require('telescope.previewers').vim_buffer_cat.new,
         },
         -- defaults = {
